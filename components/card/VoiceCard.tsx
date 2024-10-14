@@ -12,7 +12,13 @@ import { clsx } from 'clsx';
 function VoiceCard({ voice }: { voice: Voice }) {
     const [liked, setLiked] = React.useState(false);
     const [isPlay, setIsPlay] = React.useState(false);
-    let audio = new  Audio(voice.voice_uri)
+    let audio: HTMLAudioElement
+    useEffect(() => {
+        audio = new Audio(voice.voice_uri)
+        return () => {
+        }
+    }, [])
+
     const handlePlay = () => {
         if (isPlay) {
             audio.pause()
@@ -33,7 +39,7 @@ function VoiceCard({ voice }: { voice: Voice }) {
         return () => {
             // Cleanup if necessary
         }
-    }, [audio]) // Ensure audio is in the dependency array
+    }, []) // Ensure audio is in the dependency array
 
     return (
 
@@ -73,7 +79,7 @@ function VoiceCard({ voice }: { voice: Voice }) {
                                         () => setIsPlay(!isPlay)
                                     }
                                 >
-                                    {isPlay && <PauseCircleIcon  className='text-white' size={54} />}
+                                    {isPlay && <PauseCircleIcon className='text-white' size={54} />}
                                 </Button>
                             </div>
                         </div>
