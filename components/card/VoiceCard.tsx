@@ -1,8 +1,8 @@
 import { Button, Card, CardBody, Image, Slider } from '@nextui-org/react'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { HeartIcon } from '../icons/HeartIcon'
 import { RepeatOneIcon } from '../icons/RepeatOneIcon'
-import { PauseCircleIcon } from '../icons/PauseCircleIcon '
+import { PauseCircleIcon } from '../icons/PauseCircleIcon'
 import { PreviousIcon } from '../icons/PreviousIcon'
 import { ShuffleIcon } from '../icons/ShuffleIcon'
 import { NextIcon } from '../icons/NextIcon'
@@ -12,7 +12,7 @@ import { clsx } from 'clsx';
 function VoiceCard({ voice }: { voice: Voice }) {
     const [liked, setLiked] = React.useState(false);
     const [isPlay, setIsPlay] = React.useState(false);
-    let audio = new Audio(voice.voice_uri)
+    let audio = new  Audio(voice.voice_uri)
     const handlePlay = () => {
         if (isPlay) {
             audio.pause()
@@ -73,7 +73,7 @@ function VoiceCard({ voice }: { voice: Voice }) {
                                         () => setIsPlay(!isPlay)
                                     }
                                 >
-                                    {isPlay && <PauseCircleIcon className='text-white' size={54} />}
+                                    {isPlay && <PauseCircleIcon  className='text-white' size={54} />}
                                 </Button>
                             </div>
                         </div>

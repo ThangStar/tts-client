@@ -1,12 +1,12 @@
-export const PreviousIcon = ({size = 24, width, height, ...props}) => (
+export const PreviousIcon = ({ ...props}) => (
     <svg
       aria-hidden="true"
       fill="none"
       focusable="false"
-      height={size || height}
+      
       role="presentation"
       viewBox="0 0 24 24"
-      width={size || width}
+      
       {...props}
     >
       <path

@@ -1,19 +1,15 @@
 export const HeartIcon = ({
     size = 24,
-    width,
-    height,
     strokeWidth = 1.5,
     fill = "none",
     ...props
-}) => (
+}: any) => (
     <svg
         aria-hidden="true"
         fill={fill}
         focusable="false"
-        height={size || height}
         role="presentation"
         viewBox="0 0 24 24"
-        width={size || width}
         {...props}
     >
         <path

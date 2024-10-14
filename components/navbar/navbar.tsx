@@ -34,7 +34,7 @@ export const NavbarWrapper = ({ children }: Props) => {
               input: "w-full",
               mainWrapper: "w-full",
             }}
-            placeholder="Search..."
+            placeholder="Tìm kiếm"
           />
         </NavbarContent>
         <NavbarContent
@@ -43,17 +43,13 @@ export const NavbarWrapper = ({ children }: Props) => {
         >
           <div className="flex items-center gap-2 max-md:hidden">
             <FeedbackIcon />
-            <span>Feedback?</span>
+            <span>Báo lỗi?</span>
           </div>
 
           <NotificationsDropdown />
 
-          <div className="max-md:hidden">
-            <SupportIcon />
-          </div>
-
           <Link
-            href="https://github.com/Siumauricio/nextui-dashboard-template"
+            href="https://github.com/ThangStar"
             target={"_blank"}
           >
             <GithubIcon />

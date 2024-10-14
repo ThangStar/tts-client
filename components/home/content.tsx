@@ -77,7 +77,7 @@ export const Content = () => {
       <Card
         isFooterBlurred
         radius="lg"
-        className="border-none bg-gradient-to-r from-transparent to-primary-500 flex flex-col p-4"
+        className="border-none bg-gradient-to-r from-transparent to-secondary-500 flex flex-col p-4"
       >
         <div className=" justify-between items-center flex">
           <div className="h-full flex flex-col justify-between">
