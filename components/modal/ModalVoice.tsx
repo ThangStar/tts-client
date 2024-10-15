@@ -8,10 +8,8 @@ function ModelVoice() {
     return (
         <ModalContent className=''>
             {(onClose) => (
-                <div className='overflow-y-scroll scrollbar-hide'>
+                <div  onClick={onClose} className='overflow-y-scroll scrollbar-hide'>
                     <ModalHeader className="flex flex-col gap-1">Giọng nói</ModalHeader>
-
-
                     <ModalBody className=''>
                         <h2>Bộ lọc</h2>
                         <Autocomplete

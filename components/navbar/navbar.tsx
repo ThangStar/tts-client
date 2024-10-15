@@ -41,12 +41,10 @@ export const NavbarWrapper = ({ children }: Props) => {
           justify="end"
           className="w-fit data-[justify=end]:flex-grow-0"
         >
-          <div className="flex items-center gap-2 max-md:hidden">
+          <div className="flex items-center gap-2 max-md:hidden cursor-pointer">
             <FeedbackIcon />
-            <span>Báo lỗi?</span>
           </div>
 
-          <NotificationsDropdown />
 
           <Link
             href="https://github.com/ThangStar"

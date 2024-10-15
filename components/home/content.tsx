@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import dynamic from "next/dynamic";
 import { TableWrapper } from "../table/table";
 import { CardBalance1 } from "./card-balance1";
@@ -10,8 +10,10 @@ import { CardTransactions } from "./card-transactions";
 import { Button, Card, CardBody, CardFooter, CardHeader, Checkbox, Image, Input, Link, Modal, Select, SelectItem, Textarea, useDisclosure } from "@nextui-org/react";
 import NextLink from "next/link";
 import { Client } from "@gradio/client";
-import ModelVoice from "../modal/ModelVoice";
+import ModelVoice from "../modal/ModalVoice";
 import { VOICE_LIST } from "@/constants/constants";
+import { PauseCircleIcon } from "../icons/PauseCircleIcon";
+import { PlayIcon } from "../icons/playicon";
 
 const Chart = dynamic(
   () => import("../charts/steam").then((mod) => mod.Steam),
@@ -60,16 +62,29 @@ const dqwdwqd = async () => {
 };
 
 export const Content = () => {
-
   const [filter, setFilter] = useState('Tất cả');
   const [text, setText] = useState('');
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const filteredVoices = voices.filter(voice =>
     filter === 'Tất cả' || voice.category === filter
   );
 
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const defaultVoice = VOICE_LIST[0]
+  const defaultVoice = VOICE_LIST[0];
+
+  const handlePlayPause = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
   return (
     <div className="flex flex-col justify-center px-6 py-4">
       <h1 className="mb-6">Chuyển văn bản thành giọng nói</h1>
@@ -79,7 +94,7 @@ export const Content = () => {
         radius="lg"
         className="border-none bg-gradient-to-r from-transparent to-secondary-500 flex flex-col p-4"
       >
-        <div className=" justify-between items-center flex">
+        <div className="justify-between items-center flex">
           <div className="h-full flex flex-col justify-between">
             <div>
               <h2 className="text-xl font-bold mb-2">{defaultVoice.name}</h2>
@@ -90,7 +105,7 @@ export const Content = () => {
             </Button>
           </div>
           <div className="relative">
-            <div className="bg-gradient-to-br  rounded-xl from-[#0432ff10] to-[#0432ff60] absolute inset-0 z-20">
+            <div className="bg-gradient-to-br rounded-xl from-[#0432ff10] to-[#0432ff60] absolute inset-0 z-20">
             </div>
             <Image
               alt="Woman listing to music"
@@ -102,6 +117,7 @@ export const Content = () => {
           </div>
         </div>
       </Card>
+
       <h2 className="text-xl font-bold mb-3 mt-6">Văn bản</h2>
       <Textarea
         variant="bordered"
@@ -111,18 +127,23 @@ export const Content = () => {
         className="w-full mb-3"
       />
 
-      <Checkbox
-        defaultSelected color="secondary" className="mb-3">Khử tiếng ồn</Checkbox>
-      <Button className="py-7 w-1/3 mx-auto bg-gradient-to-tr from-secondary-50 to-secondary-500 text-white shadow-lg">
-        Chuyển đổi
-      </Button>
+      <Checkbox defaultSelected color="secondary" className="mb-3">
+        Khử tiếng ồn
+      </Checkbox>
 
-      <Modal
-        size={'full'}
-        isOpen={isOpen}
-        className="h-full"
-        onClose={onClose}
-      >
+      <div className="flex justify-center space-x-4">
+        <Button 
+          className="py-7 w-1/3 bg-gradient-to-tr from-secondary-50 to-secondary-500 text-white shadow-lg"
+          onClick={() => {/* Add conversion logic here */}}
+        >
+          Chuyển đổi
+        </Button>
+        
+      </div>
+
+      <audio ref={audioRef} src="/voice/thanh_pham.wav" />
+
+      <Modal size={'full'} isOpen={isOpen} className="h-full" onClose={onClose}>
         <ModelVoice />
       </Modal>
     </div>
