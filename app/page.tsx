@@ -1,3 +1,4 @@
+"use client"
 import { Content } from '@/components/home/content'
 import React from 'react'
 
