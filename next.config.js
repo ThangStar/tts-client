@@ -1,4 +1,8 @@
-const nextConfig = {
+/** @type {import('next').NextConfig} */
+module.exports = {
+  reactStrictMode: false,
+  basePath: "/tts-client",
+  output: "export",
   webpack: (config) => {
     config.resolve.fallback = {
       fs: false,
@@ -7,22 +11,7 @@ const nextConfig = {
       child_process: false,
       tls: false,
     };
-
-    config.module.rules.push({
-      test: /\.svg$/,
-      use: ['@svgr/webpack']
-    })
     return config;
   },
-  images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "**",
-      },
-    ],
-  },
-  basePath: '/tts-client',
-};
+}
 
-export default nextConfig;
