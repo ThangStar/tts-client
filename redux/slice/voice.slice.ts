@@ -15,7 +15,7 @@ const action = {
     fetchTTS: createAsyncThunk('voice/fetchTTS', async (voice: tts_dto, thunkAPI) => {
         try {
             console.log("Đã chuyển sang blob");
-            let body;
+            let body: any = null;
             if (Array.isArray(voice.body)) {
                 body = [voice.content]
             } else {
