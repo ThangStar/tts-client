@@ -5,7 +5,7 @@ import { useLockedBody } from "../hooks/useBodyLock";
 import { NavbarWrapper } from "../navbar/navbar";
 import { SidebarWrapper } from "../sidebar/sidebar";
 import { SidebarContext } from "./layout-context";
-import LeftSidebar from "../sidebar/LeftSidebar";
+import LeftSidebar from "../sidebar/RightSidebar";
 
 interface Props {
   children: React.ReactNode;

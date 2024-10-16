@@ -2,13 +2,15 @@ import { Autocomplete, AutocompleteItem, AutocompleteSection, Avatar, Button, Mo
 import React from 'react'
 import VoiceCard from '../card/VoiceCard'
 import { VOICE_FILTER, VOICE_LIST } from '@/constants/constants'
+import { useDispatch } from 'react-redux';
+import { VoiceAction } from '@/redux/slice/voice.slice';
 
 function ModelVoice() {
     const headingClasses = "flex w-full sticky top-1 z-20 py-1.5 px-2 bg-default-100 shadow-small rounded-small";
     return (
         <ModalContent className=''>
             {(onClose) => (
-                <div  onClick={onClose} className='overflow-y-scroll scrollbar-hide'>
+                <div className='overflow-y-scroll scrollbar-hide'>
                     <ModalHeader className="flex flex-col gap-1">Giọng nói</ModalHeader>
                     <ModalBody className=''>
                         <h2>Bộ lọc</h2>
@@ -39,7 +41,7 @@ function ModelVoice() {
 
                         <div className='flex gap-4 flex-wrap '>
                             {VOICE_LIST.map((voice) => (
-                                <VoiceCard key={voice.id} voice={voice} />
+                                <VoiceCard onClose={onClose} key={voice.id} voice={voice} />
                             ))}
                         </div>
                     </ModalBody>

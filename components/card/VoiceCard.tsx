@@ -6,11 +6,13 @@ import { PauseCircleIcon } from '../icons/PauseCircleIcon'
 import { PreviousIcon } from '../icons/PreviousIcon'
 import { ShuffleIcon } from '../icons/ShuffleIcon'
 import { NextIcon } from '../icons/NextIcon'
-import { Voice } from '@/types/voice.type'
+import { voice } from '@/types/voice.type'
 import { clsx } from 'clsx';
 import { PlayIcon } from '../icons/playicon'
+import { useDispatch } from 'react-redux'
+import { VoiceAction } from '@/redux/slice/voice.slice'
 
-function VoiceCard({ voice }: { voice: Voice }) {
+function VoiceCard({ voice, onClose }: { voice: voice, onClose: () => void }) {
     const [liked, setLiked] = React.useState(false);
     const [isPlay, setIsPlay] = React.useState(false);
     const [mounted, setMounted] = useState(false)
@@ -33,14 +35,23 @@ function VoiceCard({ voice }: { voice: Voice }) {
             setIsPlay(false)
         }
     }, [audio])
-    return (
 
+    const dispatch = useDispatch<any>()
+    const { setVoiceSelected } = VoiceAction
+
+    const handleSelectVoice = () => {
+        onClose()
+        dispatch(setVoiceSelected(voice))
+    }
+    return (
         <Card
             isBlurred
             className={`border-none !border-2 !border-primary bg-background/60 dark:bg-default-100/50 max-w-[310px] cursor-pointer `}
             shadow="sm"
         >
-            <CardBody>
+            <CardBody
+                onClick={handleSelectVoice}
+            >
                 <div className="gap-6 md:gap-4 items-center justify-center">
                     <div className="relative col-span-6 md:col-span-4">
                         <div
@@ -64,9 +75,9 @@ function VoiceCard({ voice }: { voice: Voice }) {
                     >
                         <div className="flex justify-between items-start">
 
-                            <div className="flex flex-col gap-0">
+                            <div className="flex flex-col gap-0 w-36">
                                 <h3 className="font-semibold text-foreground/90">{voice.name}</h3>
-                                <p className="text-small text-foreground/80">@{voice.idRepo}</p>
+                                <p className="text-small text-foreground/80 line-clamp-1">@{voice.idRepo}</p>
                             </div>
                             <div className="">
                                 <Button
