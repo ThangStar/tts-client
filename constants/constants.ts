@@ -105,7 +105,36 @@ export const VOICE_LIST: voice[] = [
         route: "/predict",
         body: ["Xin chào, tôi là một trợ lí A.I, dùng để chuyển văn bản thành giọng nói"]
     },
-
+    {
+        id: 9,
+        name: 'VTV 24 Bản 1',
+        idRepo: 'akthangdz/tts-vie2',
+        avatar_uri: 'image/vtv24.jpg',
+        voice_uri: 'voice/vtv24_1.wav',
+        route: "/run_tts",
+        body: {
+            lang: "vi",
+            tts_text: "TEXT",
+            speaker_audio_file: '',
+            use_deepfilter: true,
+            normalize_text: true,
+        }
+    },
+    {
+        id: 10,
+        name: 'Thời sự',
+        idRepo: 'akthangdz/tts-vie2',
+        avatar_uri: 'image/thoi_su.jpg',    
+        voice_uri: 'voice/vtv24_2.wav',
+        route: "/run_tts",
+        body: {
+            lang: "vi",
+            tts_text: "TEXT",
+            speaker_audio_file: '',
+            use_deepfilter: true,
+            normalize_text: true,
+        }
+    },
 ]
 
 export const VOICE_FILTER =
