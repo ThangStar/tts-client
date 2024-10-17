@@ -1,8 +1,8 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
   reactStrictMode: false,
-  basePath: "/tts-client",
-  output: "export",
+  // basePath: "/tts-client",
+  // output: "export",
   webpack: (config) => {
     config.resolve.fallback = {
       fs: false,
