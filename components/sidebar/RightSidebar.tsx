@@ -19,14 +19,14 @@ function RightSidebar({ isOpenDrawer, onCloseDrawer }: Props) {
             {
                 isOpenDrawer &&
                 <div>
-                    <div onClick={onCloseDrawer} className='fixed lg:hidden inset-0 bg-[#00000060] z-50'>
+                    <div onClick={onCloseDrawer} className='fixed lg:hidden inset-0 bg-[#00000060] z-40'>
                     </div>
                     <motion.aside
                         initial={{ x: 300 }}
                         animate={{ x: 0 }}
                         exit={{ x: 300 }}
                         transition={{ duration: 0.3 }}
-                        className="h-screen border-l fixed lg:sticky lg:block border-default-200 px-6 py-8 z-[120] top-0 right-0 w-2/3 lg:w-full bg-background">
+                        className="h-screen border-l fixed lg:sticky lg:block border-default-200 px-6 py-8 z-[50] top-0 right-0 w-2/3 lg:w-full bg-background">
                         <div className='z-20'>
                             <h2 className='w-full'>File đã xuất</h2>
                             <button className="Btn mt-6" onClick={onOpen}>

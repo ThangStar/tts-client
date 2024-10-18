@@ -52,7 +52,7 @@ function VoiceCard({ voice, onClose }: { voice: voice, onClose: () => void }) {
             <CardBody
                 onClick={handleSelectVoice}
             >
-                <div className="gap-6 md:gap-4 items-center justify-center">
+                <div className="gap-3 md:gap-6 flex flex-col h-full items-center place-content-between">
                     <div className="relative col-span-6 md:col-span-4">
                         <div
                             className='mb-3'
@@ -60,26 +60,24 @@ function VoiceCard({ voice, onClose }: { voice: voice, onClose: () => void }) {
 
                             <Image
                                 alt="Album cover"
-                                className="object-cover"
-                                height={200}
+                                className="object-cover w-full h-full"
                                 shadow="md"
                                 src={voice.avatar_uri}
-                                width={200}
+                                height={280}
                             />
 
 
                         </div>
                     </div>
 
-                    <div className="flex flex-col col-span-6 md:col-span-8"
+                    <div className="flex  flex-col col-span-6 md:col-span-8"
                     >
-                        <div className="flex justify-between items-start">
-
-                            <div className="flex flex-col gap-0 w-36">
+                        <div className="grid grid-cols-3 justify-between items-start w-full">
+                            <div className="flex flex-col col-span-2 gap-0">
                                 <h3 className="font-semibold text-foreground/90">{voice.name}</h3>
                                 <p className="text-small text-foreground/80 line-clamp-1">@{voice.idRepo}</p>
                             </div>
-                            <div className="">
+                            <div className="col-span-1 flex justify-end">
                                 <Button
                                     isIconOnly
                                     className="w-auto h-auto data-[hover]:bg-foreground/10"

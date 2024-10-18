@@ -11,7 +11,7 @@ import { PauseCircleIcon } from "../icons/PauseCircleIcon";
 import { PlayIcon } from "../icons/playicon";
 import { useDispatch, useSelector } from "react-redux";
 import { VoiceAction, VoiceState } from "@/redux/slice/voice.slice";
-
+import ReactDOM from 'react-dom';
 const voices = [
   {
     id: 1,
@@ -77,7 +77,7 @@ export const Content = () => {
         radius="lg"
         className="border-none bg-gradient-to-r from-transparent to-secondary-500 flex flex-col p-4"
       >
-        <div className="justify-between items-center flex gap-x-5">
+        <div className="justify-between items-center flex gap-x-3">
           <div className="h-full flex flex-col justify-between">
             <div>
               <h2 className="text-xl font-bold mb-2">{voiceSelected.name}</h2>
@@ -127,9 +127,8 @@ export const Content = () => {
         >
           Chuyển đổi
         </Button>
-
       </div>
-      <Modal size={'full'} isOpen={isOpen} className="h-full" onClose={onClose}>
+      <Modal size={'full'} isOpen={isOpen} className="" onClose={onClose}>
         <ModelVoice />
       </Modal>
     </div>

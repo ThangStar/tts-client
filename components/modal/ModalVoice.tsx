@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { VoiceAction } from '@/redux/slice/voice.slice';
 
 function ModelVoice() {
-    const headingClasses = "flex w-full sticky top-1 z-20 py-1.5 px-2 bg-default-100 shadow-small rounded-small";
+    const headingClasses = "flex w-full sticky top-1 z-[20] py-1.5 px-2 bg-default-100 shadow-small rounded-small";
     return (
         <ModalContent className=''>
             {(onClose) => (
@@ -39,13 +39,13 @@ function ModelVoice() {
                             </AutocompleteSection>
                         </Autocomplete>
 
-                        <div className='flex gap-4 flex-wrap '>
+                        <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 flex-wrap'>
                             {VOICE_LIST.map((voice) => (
                                 <VoiceCard onClose={onClose} key={voice.id} voice={voice} />
                             ))}
                         </div>
                     </ModalBody>
-                    <div className='flex justify-end gap-4 absolute bottom-10 right-10'>
+                    <div className='flex justify-end gap-4 bg-background w-full absolute bottom-0 right-0 p-6'>
                         <Button color="danger" variant="light" onPress={onClose}>
                             Đóng
                         </Button>
