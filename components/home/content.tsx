@@ -122,7 +122,7 @@ export const Content = () => {
       </div>
       <div className="flex justify-center space-x-4">
         <Button
-          className="py-7 mt-8 w-full bg-gradient-to-tr from-secondary-50 to-secondary-500 text-white shadow-lg"
+          className="py-7 mt-8 w-full bg-gradient-to-tr from-secondary-300 to-secondary-500 text-white shadow-lg"
           onClick={handleConvert}
         >
           Chuyển đổi

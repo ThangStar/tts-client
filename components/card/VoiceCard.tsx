@@ -89,7 +89,7 @@ function VoiceCard({ voice, onClose }: { voice: voice, onClose: () => void }) {
                                         handleTogglePlay
                                     }
                                 >
-                                    {isPlay ? <PauseCircleIcon className='text-white' size={54} /> : <PlayIcon fill='#fff' size={40} />}
+                                    {isPlay ? <PauseCircleIcon className='text-default-900' size={54} /> : <PlayIcon className='text-default-900 p-1' size={40} />}
                                 </Button>
                             </div>
                         </div>

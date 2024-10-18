@@ -5,7 +5,7 @@ import { useLockedBody } from "../hooks/useBodyLock";
 import { NavbarWrapper } from "../navbar/navbar";
 import { SidebarWrapper } from "../sidebar/sidebar";
 import { SidebarContext } from "./layout-context";
-import LeftSidebar from "../sidebar/RightSidebar";
+import RightSidebar from "../sidebar/RightSidebar";
 
 interface Props {
   children: React.ReactNode;
@@ -28,7 +28,9 @@ export const Layout = ({ children }: Props) => {
       <section className='flex'>
         <SidebarWrapper />
         <NavbarWrapper>{children}</NavbarWrapper>
-        <LeftSidebar />
+        <div className="hidden lg:block w-1/4">
+          <RightSidebar isOpenDrawer />
+        </div>
       </section>
     </SidebarContext.Provider>
   );

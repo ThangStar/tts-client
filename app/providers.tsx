@@ -23,7 +23,7 @@ export function Providers({ children, themeProps }: ProvidersProps) {
           defaultTheme='system'
           attribute='class'
           {...themeProps}>
-          <DebugBar />
+          {/* <DebugBar /> */}
           <Layout>
             {children}
           </Layout>
