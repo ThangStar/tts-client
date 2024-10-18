@@ -1,11 +1,6 @@
 "use client";
 import React, { useState, useRef, useId } from "react";
 import dynamic from "next/dynamic";
-import { TableWrapper } from "../table/table";
-import { CardBalance1 } from "./card-balance1";
-import { CardBalance2 } from "./card-balance2";
-import { CardBalance3 } from "./card-balance3";
-import { CardAgents } from "./card-agents";
 import { CardTransactions } from "./card-transactions";
 import { Button, Card, CardBody, CardFooter, CardHeader, Checkbox, Image, Input, Link, Modal, Progress, Select, SelectItem, Textarea, useDisclosure } from "@nextui-org/react";
 import NextLink from "next/link";
