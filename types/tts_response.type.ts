@@ -6,7 +6,7 @@ export type tts_response = {
     orig_name?: string | null;
     path?: string | null;
     size?: number | null;
-    url?: string;
+    url?:  string | number | boolean | voice | null | undefined;
     voice: voice;
     progress: boolean;
 }

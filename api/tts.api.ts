@@ -1,20 +1,41 @@
 import { tts_dto, tts_params_dto } from "@/redux/slice/voice.slice";
 import { tts_response } from "@/types/tts_response.type";
 import { Client } from "@gradio/client";
+import { omit } from "lodash";
 
 
 export const TTSApi = {
     tts: async (params: tts_params_dto) => {
+        console.log('body', params.body);
+
         const client = await Client.connect(params.idRepo);
         console.log("Đã connect được đến server");
-        const result = await client.predict(params.route || "/text_to_speech", params.body);
+
+        console.log("BODY SAMSUNG", params.body.route ? omit(params.body, ['route']) : params.body);
+
+        const result = await client.predict(params.route || "/text_to_speech", params.body.route ? omit(params.body, ['route']) : params.body);
         console.log("Đã predict được");
-        console.log(result.data);
+        console.log("result", result.data, Array.isArray(result.data));
+
         const data = result.data as tts_response[]
-        if(Array.isArray(data) && data.length > 1 && data[1]!.url){
-            return data[1]
+        let res: tts_response | null = null
+        if (Array.isArray(data)) {
+            data.map((e, i) => {
+                console.log(111111);
+                console.log(typeof e.url);
+                console.log(e.url);
+                console.log(e.url && typeof e.url === 'string');
+                console.log(e.url?.toString().includes('.wav'));
+
+                if (e.url && typeof e.url === 'string') {
+                    if (e.url.includes('.wav')) {
+                        console.log("OK", e);
+                        res = e
+                    }
+                }
+            })
         }
-        return data[0] || null
+        return res || data[0] || null
     },
     loadModel: async (params: tts_params_dto) => {
         const client = await Client.connect("akthangdz/tts-vie2");

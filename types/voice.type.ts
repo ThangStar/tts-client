@@ -4,6 +4,5 @@ export type voice = {
     avatar_uri: string;
     idRepo: string;
     voice_uri: string;
-    body?: any;
-    route?: string;
+    bodys?: any[];
 }

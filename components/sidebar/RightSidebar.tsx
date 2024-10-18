@@ -38,7 +38,7 @@ function LeftSidebar() {
                             (
                                 <div className='flex flex-col gap-4 mt-4 w-full'>
                                     <audio controls key={index} className='w-full'>
-                                        <source src={voice.url} type="audio/mpeg" />
+                                        <source src={voice.url as string} type="audio/mpeg" />
                                     </audio>
                                 </div>
                             )

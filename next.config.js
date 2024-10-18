@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
-  reactStrictMode: false,
+  reactStrictMode: true,
   // basePath: "/tts-client",
   // output: "export",
   webpack: (config) => {

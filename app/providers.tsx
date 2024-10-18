@@ -7,6 +7,7 @@ import { Layout } from "@/components/layout/layout";
 import { Provider } from "react-redux";
 import store from "@/redux/store/store";
 import { Toaster } from "react-hot-toast";
+import DebugBar from "@/components/debug/DebugBar";
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -16,16 +17,17 @@ export interface ProvidersProps {
 export function Providers({ children, themeProps }: ProvidersProps) {
   return (
     <Provider store={store}>
-      <Toaster/>
+      <Toaster />
       <NextUIProvider>
         <NextThemesProvider
-        defaultTheme='system'
-        attribute='class'
-        {...themeProps}>
-        <Layout>
-          {children}
-        </Layout>
-      </NextThemesProvider>
+          defaultTheme='system'
+          attribute='class'
+          {...themeProps}>
+          <DebugBar />
+          <Layout>
+            {children}
+          </Layout>
+        </NextThemesProvider>
       </NextUIProvider>
     </Provider>
   );

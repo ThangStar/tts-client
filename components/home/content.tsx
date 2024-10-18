@@ -65,8 +65,7 @@ export const Content = () => {
       idRepo: voiceSelected.idRepo,
       voice_uri: voiceSelected.voice_uri,
       name: voiceSelected.name,
-      body: voiceSelected.body || {},
-      route: voiceSelected.route
+      bodys: voiceSelected.bodys || [],
     }))
   }
   return (

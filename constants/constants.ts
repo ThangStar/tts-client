@@ -7,23 +7,28 @@ export const VOICE_LIST: voice[] = [
         idRepo: 'akthangdz/tts-vie-applio',
         avatar_uri: 'image/hoai-my.jpg',
         voice_uri: 'voice/hoai_my.mp3',
-        route: "/text_to_speech",
-        body: {
-            text: "TEXT",
-            voice: "vi-VN-HoaiMyNeural",
-        }
+        bodys: [
+            {
+                route: "/text_to_speech",
+                text: "TEXT",
+                voice: "vi-VN-HoaiMyNeural",
+
+            }
+        ]
     },
     {
         id: 6,
         name: 'Nam minh',
         idRepo: 'akthangdz/tts-vie-applio',
         avatar_uri: 'image/nam-minh.jpg',
-        route: "/text_to_speech",
         voice_uri: 'voice/nam_minh.mp3',
-        body: {
-            text: "TEXT",
-            voice: "vi-VN-NamMinhNeural",
-        }
+        bodys: [
+            {
+                route: "/text_to_speech",
+                text: "TEXT",
+                voice: "vi-VN-NamMinhNeural",
+            }
+        ]
     },
     {
         id: 1,
@@ -31,14 +36,16 @@ export const VOICE_LIST: voice[] = [
         avatar_uri: 'image/thanh_pham.jpg',
         idRepo: 'akthangdz/tts-vie2',
         voice_uri: 'voice/thanhpham.wav',
-        route: "/run_tts",
-        body: {
-            lang: "vi",
-            tts_text: "TEXT",
-            speaker_audio_file: '',
-            use_deepfilter: true,
-            normalize_text: true,
-        }
+        bodys: [
+            {
+                route: "/run_tts",
+                lang: "vi",
+                tts_text: "TEXT",
+                speaker_audio_file: '',
+                use_deepfilter: false,
+                normalize_text: true,
+            }
+        ]
 
     },
     {
@@ -47,14 +54,16 @@ export const VOICE_LIST: voice[] = [
         idRepo: 'akthangdz/tts-vie2',
         avatar_uri: 'image/co_ba_binh_duong.jpg',
         voice_uri: 'voice/CoBaBinhDuong.wav',
-        route: "/run_tts",
-        body: {
-            lang: "vi",
-            tts_text: "TEXT",
-            speaker_audio_file: '',
-            use_deepfilter: true,
-            normalize_text: true,
-        }
+        bodys: [
+            {
+                route: "/run_tts",
+                lang: "vi",
+                tts_text: "TEXT",
+                speaker_audio_file: '',
+                use_deepfilter: true,
+                normalize_text: true,
+            }
+        ]
     },
     {
         id: 3,
@@ -62,14 +71,16 @@ export const VOICE_LIST: voice[] = [
         idRepo: 'akthangdz/tts-vie2',
         avatar_uri: 'image/web-5-ngay.jpg',
         voice_uri: 'voice/web5ngay.wav',
-        route: "/run_tts",
-        body: {
-            lang: "vi",
-            tts_text: "TEXT",
-            speaker_audio_file: '',
-            use_deepfilter: true,
-            normalize_text: true,
-        }
+        bodys: [
+            {
+                route: "/run_tts",
+                lang: "vi",
+                tts_text: "TEXT",
+                speaker_audio_file: '',
+                use_deepfilter: true,
+                normalize_text: true,
+            }
+        ]
     },
     {
         id: 4,
@@ -77,33 +88,43 @@ export const VOICE_LIST: voice[] = [
         idRepo: 'akthangdz/tts-vie2',
         avatar_uri: 'image/vu-tru-nguyen-thuy.jpg',
         voice_uri: 'voice/VuTruNguyenThuy.wav',
-        route: "/run_tts",
-        body: {
-            lang: "vi",
-            tts_text: "TEXT",
-            speaker_audio_file: '',
-            use_deepfilter: true,
-            normalize_text: true,
-        }
+        bodys: [
+            {
+                route: "/run_tts",
+                lang: "vi",
+                tts_text: "TEXT",
+                speaker_audio_file: '',
+                use_deepfilter: true,
+                normalize_text: true,
+            }
+        ]
     },
     {
         id: 7,
         name: 'Trợ lí nam',
         idRepo: 'https://ntt123-vietnam-male-voice-tts.hf.space/',
-        avatar_uri: 'image/hoai-my.jpg',
+        avatar_uri: 'image/tro-li-nam.jpg',
         voice_uri: 'voice/hoai_my.mp3',
-        route: "/predict",
-        body: ["TEXT"]
+        bodys: [
+            {
+                text: ["TEXT"],
+                route: "/predict",
+            }
+        ]
     },
 
     {
         id: 8,
         name: 'Trợ lí nữ',
         idRepo: 'https://ntt123-vietnam-female-voice-tts.hf.space/',
-        avatar_uri: 'image/hoai-my.jpg',
+        avatar_uri: 'image/tro-li-nu.jpg',
         voice_uri: 'voice/hoai_my.mp3',
-        route: "/predict",
-        body: ["Xin chào, tôi là một trợ lí A.I, dùng để chuyển văn bản thành giọng nói"]
+        bodys: [
+            {
+                text: ["TEXT"],
+                route: "/predict",
+            }
+        ]
     },
     {
         id: 9,
@@ -111,30 +132,48 @@ export const VOICE_LIST: voice[] = [
         idRepo: 'akthangdz/tts-vie2',
         avatar_uri: 'image/vtv24.jpg',
         voice_uri: 'voice/vtv24_1.wav',
-        route: "/run_tts",
-        body: {
-            lang: "vi",
-            tts_text: "TEXT",
-            speaker_audio_file: '',
-            use_deepfilter: true,
-            normalize_text: true,
-        }
+        bodys: [
+            {
+                route: "/run_tts",
+                lang: "vi",
+                tts_text: "TEXT",
+                speaker_audio_file: '',
+                use_deepfilter: true,
+                normalize_text: true,
+            }
+        ]
     },
     {
         id: 10,
         name: 'Thời sự',
         idRepo: 'akthangdz/tts-vie2',
-        avatar_uri: 'image/thoi_su.jpg',    
+        avatar_uri: 'image/thoi_su.jpg',
         voice_uri: 'voice/vtv24_2.wav',
-        route: "/run_tts",
-        body: {
-            lang: "vi",
-            tts_text: "TEXT",
-            speaker_audio_file: '',
-            use_deepfilter: true,
-            normalize_text: true,
-        }
+        bodys: [
+            {
+                route: "/run_tts",
+                lang: "vi",
+                tts_text: "TEXT",
+                speaker_audio_file: '',
+                use_deepfilter: true,
+                normalize_text: true,
+            }
+        ]
     },
+    {
+        id: 11,
+        name: 'Nguyễn Ngọc Ngạn',
+        idRepo: 'akthangdz/tts-ngngan',
+        avatar_uri: 'image/ngoc_ngan.jpg',
+        voice_uri: 'voice/vtv24_2.wav',
+        bodys: [
+            {
+                route: "/speak",
+                text: "TEXT",
+            },
+        ]
+
+    }
 ]
 
 export const VOICE_FILTER =
