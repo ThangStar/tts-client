@@ -57,19 +57,14 @@ function VoiceCard({ voice, onClose }: { voice: voice, onClose: () => void }) {
                         <div
                             className='mb-3'
                         >
-
                             <Image
                                 alt="Album cover"
-                                className="object-cover w-full h-full"
+                                className="object-cover w-96 h-40 sm:h-56 md:h-64 lg:h-72"
                                 shadow="md"
                                 src={voice.avatar_uri}
-                                height={280}
                             />
-
-
                         </div>
                     </div>
-
                     <div className="flex  flex-col col-span-6 md:col-span-8"
                     >
                         <div className="grid grid-cols-3 justify-between items-start w-full">
