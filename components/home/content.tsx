@@ -77,7 +77,7 @@ export const Content = () => {
         radius="lg"
         className="border-none bg-gradient-to-r from-transparent to-secondary-500 flex flex-col p-4"
       >
-        <div className="justify-between items-center flex">
+        <div className="justify-between items-center flex gap-x-5">
           <div className="h-full flex flex-col justify-between">
             <div>
               <h2 className="text-xl font-bold mb-2">{voiceSelected.name}</h2>
