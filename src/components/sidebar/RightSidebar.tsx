@@ -28,8 +28,8 @@ function RightSidebar({ isOpenDrawer, onCloseDrawer }: Props) {
                         className="h-screen border-l fixed lg:sticky lg:block border-default-200 px-6 py-8 z-[50] top-0 right-0 w-2/3 lg:w-full bg-background">
                         <div className='z-20'>
                             <h2 className='w-full'>File đã xuất</h2>
-                            <button className="Btn mt-6" onClick={onOpen}>
-                            </button>
+                            {/* <button className="Btn mt-6" onClick={onOpen}>
+                            </button> */}
                             <Modal size={'4xl'} isOpen={isOpen} onClose={onClose}>
                                 <ModalPremium />
                             </Modal>

@@ -51,7 +51,7 @@ export const SidebarWrapper = () => {
                   isActive={pathname.startsWith("/characters")}
                   title="Nhân vật ảo"
                   icon={<AccountsIcon />}
-                  href="characters"
+                  href="/characters"
                 />
                 {/* <SidebarItem
                   isActive={pathname === "/payments"}

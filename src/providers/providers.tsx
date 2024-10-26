@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 import store from "@/redux/store/store";
 import { Layout } from "@/components/layout/layout";
 import { NextUIProvider } from "@nextui-org/react";
+import ModalNoti from "@/components/modal/ModalNoti";
 
 export interface ProvidersProps {
   children: React.ReactNode;
@@ -18,6 +19,7 @@ export function Providers({ children, themeProps }: ProvidersProps) {
       <Toaster />
       <NextUIProvider>
           {/* <DebugBar /> */}
+          <ModalNoti/>
           <Layout>
             {children}
           </Layout>
