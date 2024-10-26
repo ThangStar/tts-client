@@ -73,7 +73,7 @@ jobs:
       - name: Create file .env.local
         run: |
           touch .env.local
-          echo NEXT_PUBLIC_ANALYTICS_ID=${{ vars.NEXT_PUBLIC_GEMINI_API_KEY }} >> .env.local
+          echo NEXT_PUBLIC_GEMINI_API_KEY=${{ vars.NEXT_PUBLIC_GEMINI_API_KEY }} >> .env.local
           cat .env.local
           echo "create .env.local successfully!"
       - name: Build with Next.js
