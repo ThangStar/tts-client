@@ -1,13 +1,18 @@
 "use client"
-import React, { useState, useRef, useEffect } from 'react';
-
+import React, { Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import CharacterDetail from './CharacterDetail';
-import { useParams, useSearchParams } from 'next/navigation';
 
-
-export default function Page() {
-    const searchParams = useSearchParams();
-    const id = searchParams.get('id');
-    return <CharacterDetail id={id as string} />;
+function CharacterDetailWrapper() {
+  const searchParams = useSearchParams();
+  const id = searchParams.get('id');
+  return <CharacterDetail id={id as string} />;
 }
 
+export default function Page() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <CharacterDetailWrapper />
+    </Suspense>
+  );
+}
