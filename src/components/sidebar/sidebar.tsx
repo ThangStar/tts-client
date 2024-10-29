@@ -93,6 +93,7 @@ export const SidebarWrapper = () => {
                   isActive={pathname === "/changelog"}
                   title="Changelog"
                   icon={<ChangeLogIcon />}
+                  href="/changelog"
                 />
               </SidebarMenu>
             </div>

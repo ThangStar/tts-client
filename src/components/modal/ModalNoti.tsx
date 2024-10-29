@@ -6,7 +6,7 @@ function ModalNoti() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     useEffect(() => {
         onOpen()
-        return () => { }
+        return () => { onClose()}
     }, [])
 
     return (
@@ -41,11 +41,9 @@ function ModalNoti() {
                     <Button color="default" onPress={onClose}>
                         Đóng
                     </Button>
-                    <Link href={'/characters'} >
-                        <Button color="primary">
-                            Xem ngay
-                        </Button>
-                    </Link>
+                    <Button onClick={onClose} color="primary">
+                        Xem ngay
+                    </Button>
                 </ModalFooter>
             </ModalContent>
         </Modal>

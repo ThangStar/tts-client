@@ -101,10 +101,11 @@ const Page = ({ id }: Props) => {
             <form onSubmit={handleSendMessage} className="bg-white p-4 shadow-md">
                 <div className="flex items-center">
                     <input
+                        autoFocus
                         type="text"
                         value={inputMessage}
                         onChange={(e) => setInputMessage(e.target.value)}
-                        placeholder="Type your message..."
+                        placeholder="Aa..."
                         className="flex-1 border rounded-l-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                     />
                     <button

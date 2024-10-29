@@ -9,10 +9,10 @@ const Page = () => {
     const handleCharacterClick = (character: Character) => {
         console.log(`Selected character: ${character.name}`);
     };
-
     return (
         <div className="container mx-auto p-4">
             <h1 className="text-2xl font-bold mb-4">Chọn một nhân vật để trò chuyện</h1>
+            <p className='mb-3'>Không giới hạn nội dung trò chuyện</p>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {characters.map((character) => (
                     <Link
@@ -31,6 +31,7 @@ const Page = () => {
                             />
                         </div>
                         <h2 className="text-center font-semibold">{character.name}</h2>
+                        <p className='text-ellipsis line-clamp-5'>{character.baseInstruction}</p>
                     </Link>
                 ))}
             </div>

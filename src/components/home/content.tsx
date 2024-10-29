@@ -4,6 +4,7 @@ import { Button, Card, CardBody, CardFooter, CardHeader, Checkbox, Image, Input,
 import ModelVoice from "../modal/ModalVoice";
 import { useDispatch, useSelector } from "react-redux";
 import { VoiceAction, VoiceState } from "@/redux/slice/voice.slice";
+import toast from "react-hot-toast";
 const voices = [
   {
     id: 1,
@@ -49,6 +50,10 @@ export const Content = () => {
   const dispatch = useDispatch<any>()
   const { fetchTTS, addVoice } = VoiceAction
   const handleConvert = () => {
+    if (text.trim() === '') {
+      toast.error('Vui lòng nhập văn bản');
+      return;
+    }
     dispatch(addVoice(voiceSelected))
     dispatch(fetchTTS({
       id: voiceSelected.id,

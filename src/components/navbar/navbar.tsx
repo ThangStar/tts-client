@@ -27,7 +27,7 @@ export const NavbarWrapper = ({ children }: Props) => {
   };
 
   return (
-    <div className="relative flex flex-col flex-1 h-[calc(100vh-14px)] overflow-y-hidden overflow-x-hidden">
+    <div className="relative flex flex-col flex-1 h-[calc(100vh-12px)] overflow-y-scroll overflow-x-hidden">
       <Navbar
         isBordered
         className="w-full"
