@@ -1,14 +1,16 @@
 import { Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure } from '@nextui-org/react'
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React, { useEffect } from 'react'
 
 function ModalNoti() {
     const { isOpen, onOpen, onClose } = useDisclosure();
     useEffect(() => {
         onOpen()
-        return () => { onClose()}
+        return () => { onClose() }
+        
     }, [])
-
+    const router = useRouter()
     return (
         <Modal size={'3xl'} isOpen={isOpen} onClose={onClose}>
             <ModalContent>
@@ -41,7 +43,10 @@ function ModalNoti() {
                     <Button color="default" onPress={onClose}>
                         Đóng
                     </Button>
-                    <Button onClick={onClose} color="primary">
+                    <Button onClick={() => {
+                        router.push('/characters');
+                        onClose()
+                    }} color="primary">
                         Xem ngay
                     </Button>
                 </ModalFooter>

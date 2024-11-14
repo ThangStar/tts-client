@@ -26,34 +26,41 @@ export const SidebarWrapper = () => {
   const { collapsed, setCollapsed } = useSidebarContext();
 
   return (
-      <aside className="h-screen z-[20] sticky top-0">
-        {collapsed ? (
-          <div className={Sidebar.Overlay()} onClick={setCollapsed} />
-        ) : null}
-        <div
-          className={Sidebar({
-            collapsed: collapsed,
-          })}
-        >
-          <div className={Sidebar.Header()}>
-            <CompaniesDropdown />
-          </div>
-          <div className="flex flex-col justify-between h-full">
-            <div className={Sidebar.Body()}>
+    <aside className="h-screen z-[20] sticky top-0">
+      {collapsed ? (
+        <div className={Sidebar.Overlay()} onClick={setCollapsed} />
+      ) : null}
+      <div
+        className={Sidebar({
+          collapsed: collapsed,
+        })}
+      >
+        <div className={Sidebar.Header()}>
+          <CompaniesDropdown />
+        </div>
+        <div className="flex flex-col justify-between h-full">
+          <div className={Sidebar.Body()}>
+            <SidebarItem
+              title="Văn bản thành giọng nói"
+              icon={<TTSIcon />}
+              isActive={pathname === "/"}
+              href="/"
+            />
+
+            <SidebarItem
+              title="Sáng tạo âm nhạc"
+              icon={<TTSIcon />}
+              isActive={pathname === "/ttm"}
+              href="/ttm"
+            />
+            <SidebarMenu title="Tiện ích">
               <SidebarItem
-                title="Chuyển đổi"
-                icon={<TTSIcon />}
-                isActive={pathname === "/"}
-                href="/"
+                isActive={pathname.startsWith("/characters")}
+                title="Nhân vật ảo"
+                icon={<AccountsIcon />}
+                href="/characters"
               />
-              <SidebarMenu title="Tiện ích">
-                <SidebarItem
-                  isActive={pathname.startsWith("/characters")}
-                  title="Nhân vật ảo"
-                  icon={<AccountsIcon />}
-                  href="/characters"
-                />
-                {/* <SidebarItem
+              {/* <SidebarItem
                   isActive={pathname === "/payments"}
                   title="Thanh toán"
                   icon={<PaymentsIcon />}
@@ -68,15 +75,15 @@ export const SidebarWrapper = () => {
                   title="Reports"
                   icon={<ReportsIcon />}
                 /> */}
-              </SidebarMenu>
+            </SidebarMenu>
 
-              <SidebarMenu title="Chung">
-                <SidebarItem
-                  isActive={pathname === "/developers"}
-                  title="API Endpoint"
-                  icon={<DevIcon />}
-                />
-                {/* <SidebarItem
+            <SidebarMenu title="Chung">
+              <SidebarItem
+                isActive={pathname === "/developers"}
+                title="API Endpoint"
+                icon={<DevIcon />}
+              />
+              {/* <SidebarItem
                   isActive={pathname === "/view"}
                   title="View Test Data"
                   icon={<ViewIcon />}
@@ -86,37 +93,37 @@ export const SidebarWrapper = () => {
                   title="Settings"
                   icon={<SettingsIcon />}
                 /> */}
-              </SidebarMenu>
+            </SidebarMenu>
 
-              <SidebarMenu title="Updates">
-                <SidebarItem
-                  isActive={pathname === "/changelog"}
-                  title="Changelog"
-                  icon={<ChangeLogIcon />}
-                  href="/changelog"
-                />
-              </SidebarMenu>
-            </div>
-            <div className={Sidebar.Footer()}>
-              <Tooltip content={"Settings"} color="primary">
-                <div className="max-w-fit">
-                  <SettingsIcon />
-                </div>
-              </Tooltip>
-              <Tooltip content={"Adjustments"} color="primary">
-                <div className="max-w-fit">
-                  <FilterIcon />
-                </div>
-              </Tooltip>
-              <Tooltip content={"Profile"} color="primary">
-                <Avatar
-                  src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
-                  size="sm"
-                />
-              </Tooltip>
-            </div>
+            <SidebarMenu title="Updates">
+              <SidebarItem
+                isActive={pathname === "/changelog"}
+                title="Changelog"
+                icon={<ChangeLogIcon />}
+                href="/changelog"
+              />
+            </SidebarMenu>
+          </div>
+          <div className={Sidebar.Footer()}>
+            <Tooltip content={"Settings"} color="primary">
+              <div className="max-w-fit">
+                <SettingsIcon />
+              </div>
+            </Tooltip>
+            <Tooltip content={"Adjustments"} color="primary">
+              <div className="max-w-fit">
+                <FilterIcon />
+              </div>
+            </Tooltip>
+            <Tooltip content={"Profile"} color="primary">
+              <Avatar
+                src="https://i.pravatar.cc/150?u=a042581f4e29026704d"
+                size="sm"
+              />
+            </Tooltip>
           </div>
         </div>
-      </aside>
+      </div>
+    </aside>
   );
 };

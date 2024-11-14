@@ -1,3 +1,4 @@
+import { ttm_data, ttm_response, TTMApi } from "@/api/ttm.api";
 import { TTSApi } from "@/api/tts.api";
 import { VOICE_LIST } from "@/constants/constants";
 import { tts_response } from "@/types/tts_response.type";
@@ -68,17 +69,28 @@ const action = {
     }),
     setVoiceSelected: createAsyncThunk('voice/setVoiceSelected', async (voice: voice, thunkAPI) => {
         return thunkAPI.fulfillWithValue(voice)
-    })
+    }),
+    ttm: createAsyncThunk('ttm/ttm', async (str: string, thunkAPI) => {
+        toast("Đang sáng tác...")
+        try {
+            const res = await TTMApi.ttm(str)
+            return thunkAPI.fulfillWithValue(res)
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error)
+        }
+    }),
 }
 
 export type VoiceState = {
     voiceExports: tts_response[],
     voiceSelected: voice,
+    voiceTtm: ttm_data[]
 }
 
 export const initialData: VoiceState = {
     voiceExports: [],
-    voiceSelected: VOICE_LIST[0]
+    voiceSelected: VOICE_LIST[0],
+    voiceTtm: []
 }
 
 export const voiceSlice = createSlice({
@@ -124,6 +136,13 @@ export const voiceSlice = createSlice({
             })
             .addCase(action.setVoiceSelected.fulfilled, (state, action) => {
                 state.value.voiceSelected = action.payload
+            })
+            .addCase(action.ttm.fulfilled, (state, action) => {
+                toast(`Hoàn tất ttm`);
+                state.value.voiceTtm.push(action.payload.sounds[0])
+            })
+            .addCase(action.ttm.rejected, (state, action) => {
+                toast.error(`Lỗi: ${action.payload}`);
             })
     },
 })
