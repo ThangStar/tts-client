@@ -34,7 +34,7 @@ export type ttm_response = {
 }
 export const TTMApi = {
     ttm: async (text: string, token: string, payloadDuration: number): Promise<ttm_data> => {
-        const url = "https://s3-server-one.vercel.app/api/ttm";
+        const url = "https://s3server.vercel.app/api/ttm";
         try {
             const response = await axios.post(url, {
                 data: {
