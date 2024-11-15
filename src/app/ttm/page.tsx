@@ -160,8 +160,8 @@ function Page() {
                                             >
                                                 <p className="text-lg text-primary-foreground">
                                                     {playingIndex === index
-                                                        ? (isPlaying ? "⏸️ Tạm dừng" : "▶️ Tiếp tục")
-                                                        : "▶️ Nghe"}
+                                                        ? (isPlaying ? "Tạm dừng" : "Tiếp tục")
+                                                        : "Nghe"}
                                                 </p>
                                             </Button>
                                             <Button
@@ -169,7 +169,7 @@ function Page() {
                                                 className='min-w-[50px]'
                                                 onClick={() => handleDownload(voice.data || '', index)}
                                             >
-                                                <p className="text-lg text-primary-foreground">⬇️</p>
+                                                <p className="text-lg text-primary-foreground">⬇Tải xuống</p>
                                             </Button>
                                         </div>
                                     </div>
