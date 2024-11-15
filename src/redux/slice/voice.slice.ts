@@ -70,15 +70,18 @@ const action = {
     setVoiceSelected: createAsyncThunk('voice/setVoiceSelected', async (voice: voice, thunkAPI) => {
         return thunkAPI.fulfillWithValue(voice)
     }),
-    ttm: createAsyncThunk('ttm/ttm', async (str: string, thunkAPI) => {
+    ttm: createAsyncThunk('ttm/ttm', async ({ text, token }: { text: string, token: string }, thunkAPI) => {
         toast("Đang sáng tác...")
         try {
-            const res = await TTMApi.ttm(str)
+            const res = await TTMApi.ttm(text, token)
             return thunkAPI.fulfillWithValue(res)
         } catch (error) {
-            return thunkAPI.rejectWithValue(error)
+            return thunkAPI.rejectWithValue({error, mediaTitle: text})
         }
     }),
+    ttmLoading: createAsyncThunk('ttm/ttmLoading', async (payload: { loading: boolean, mediaTitle: string }, thunkAPI) => {
+        return thunkAPI.fulfillWithValue(payload)
+    })
 }
 
 export type VoiceState = {
@@ -139,10 +142,34 @@ export const voiceSlice = createSlice({
             })
             .addCase(action.ttm.fulfilled, (state, action) => {
                 toast(`Hoàn tất ttm`);
-                state.value.voiceTtm.push(action.payload.sounds[0])
+                const index = state.value.voiceTtm.findIndex((voice: ttm_data) => voice.mediaTitle === action.payload.mediaTitle && voice.loading)
+                if (index !== -1) {
+                    state.value.voiceTtm[index] = {
+                        ...action.payload,
+                        loading: false,
+                    }
+                } else {
+                    state.value.voiceTtm.push(action.payload)
+                }
             })
             .addCase(action.ttm.rejected, (state, action) => {
-                toast.error(`Lỗi: ${action.payload}`);
+                console.log("payload", action.payload);
+
+                const index = state.value.voiceTtm.findIndex((voice: ttm_data) => voice.mediaTitle === (action.payload as any).mediaTitle && voice.loading)
+                if (index !== -1) {
+                    state.value.voiceTtm.splice(index, 1)
+                }
+                let payload = action.payload as any;
+                if(payload.error){
+                    payload = payload.error
+                    toast.error(payload.response && payload.response.data ? payload.response.data.message : payload.message);
+                }
+            })
+            .addCase(action.ttmLoading.fulfilled, (state, action) => {
+                state.value.voiceTtm.push({
+                    loading: action.payload.loading,
+                    mediaTitle: action.payload.mediaTitle
+                })
             })
     },
 })
