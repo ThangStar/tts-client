@@ -58,13 +58,13 @@ export const NavbarWrapper = ({ children }: Props) => {
             <FeedbackIcon />
           </div>
 
-
+{/* 
           <Link
             href="https://github.com/ThangStar"
             target={"_blank"}
           >
             <GithubIcon />
-          </Link>
+          </Link> */}
           <NavbarContent>
             <UserDropdown />
           </NavbarContent>
