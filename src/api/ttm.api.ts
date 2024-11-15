@@ -33,11 +33,14 @@ export type ttm_response = {
     sounds: ttm_data[]
 }
 export const TTMApi = {
-    ttm: async (text: string, token: string): Promise<ttm_data> => {
-        const url = "https://s3-server-one.vercel.app/api/ttm";
+    ttm: async (text: string, token: string, payloadDuration: number): Promise<ttm_data> => {
+        const url = "http://haihoanghorse.io.vn/v2/api/ttm";
+        console.log(payloadDuration);
+        
         try {
             const response = await axios.post(url, {
-                text,
+                text: text,
+                soundLengthSeconds: payloadDuration
             }, {
                 headers: {
                     "x-api-token": token

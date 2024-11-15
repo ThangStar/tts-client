@@ -1,10 +1,11 @@
 'use client'
 import { TTMApi } from '@/api/ttm.api'
 import { VoiceAction, VoiceState } from '@/redux/slice/voice.slice'
-import { Button, Card, CircularProgress, Input, Textarea } from '@nextui-org/react'
-import React, { useState } from 'react'
+import { Button, Card, CircularProgress, Input, Textarea, Select, SelectItem } from '@nextui-org/react'
+import React, { useState, useRef, useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
+import { number } from 'yup'
 
 function Page() {
     const [text, setText] = useState('vinahouse, remix tiktok vietnam')
@@ -15,59 +16,90 @@ function Page() {
     const [audioObj, setAudioObj] = useState<HTMLAudioElement | null>(null);
     const [playingIndex, setPlayingIndex] = useState<number | null>(null);
     const [token, setToken] = useState('S3_TOKEN_FREE')
+    const [duration, setDuration] = useState("30")
+    const [payloadDuration, setPayloadDuration] = useState("30")
+    const [currentTime, setCurrentTime] = useState<number>(0);
+    
+    const durationOptions = [
+        { label: "30 giây", value: "30" },
+        { label: "50 giây", value: "50" },
+        { label: "70 giây", value: "70" },
+    ]
+
     const handleConvert = async () => {
         if (text.trim() === '') {
             toast.error('Vui lòng nhập văn bản');
             return;
         }
         dispatch(ttmLoading({ loading: true, mediaTitle: text }))
-        dispatch(ttm({ text: text, token: token }))
+        dispatch(ttm({ text: text, token: token, payloadDuration: Number(payloadDuration)}))
     }
+
+    const handleTimeUpdate = (audio: HTMLAudioElement) => {
+        setCurrentTime(audio.currentTime);
+        setDuration(audio.duration.toString());
+    };
+    const handleChangePayloadDuration = (value: string) => {
+        setPayloadDuration(value)
+    }
+
+    const handleSliderChange = (value: number) => {
+        if (audioObj) {
+            audioObj.currentTime = value;
+            setCurrentTime(value);
+        }
+    };
+
+    const formatTime = (time: string) => {
+        let t = Number(time)
+        const minutes = Math.floor(t / 60);
+        const seconds = Math.floor(t % 60);
+        return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    };
+
     const handleListen = (data: string, index: number) => {
         try {
             if (audioObj) {
                 if (playingIndex === index) {
-                    // Pause current audio
                     audioObj.pause();
                     setIsPlaying(false);
                     setPlayingIndex(null);
                     return;
                 }
-                // Stop previous audio if playing different track
                 audioObj.pause();
                 setAudioObj(null);
             }
 
+            let audio: HTMLAudioElement;
             if (data.startsWith('http')) {
-                const audio = new Audio(data);
-                setAudioObj(audio);
-                audio.play();
-                setIsPlaying(true);
-                setPlayingIndex(index);
-                return;
+                audio = new Audio(data);
+            } else {
+                const base64Data = data.split(',')[1] || data;
+                const byteCharacters = atob(base64Data);
+                const byteNumbers = new Array(byteCharacters.length);
+
+                for (let i = 0; i < byteCharacters.length; i++) {
+                    byteNumbers[i] = byteCharacters.charCodeAt(i);
+                }
+
+                const byteArray = new Uint8Array(byteNumbers);
+                const blob = new Blob([byteArray], { type: 'audio/wav' });
+                const audioUrl = URL.createObjectURL(blob);
+
+                audio = new Audio(audioUrl);
             }
 
-            const byteCharacters = atob(data);
-            const byteNumbers = new Array(byteCharacters.length);
+            audio.addEventListener('timeupdate', () => handleTimeUpdate(audio));
+            audio.addEventListener('ended', () => {
+                setIsPlaying(false);
+                setPlayingIndex(null);
+                setCurrentTime(0);
+            });
 
-            for (let i = 0; i < byteCharacters.length; i++) {
-                byteNumbers[i] = byteCharacters.charCodeAt(i);
-            }
-
-            const byteArray = new Uint8Array(byteNumbers);
-            const blob = new Blob([byteArray], { type: 'audio/wav' });
-            const audioUrl = URL.createObjectURL(blob);
-
-            const audio = new Audio(audioUrl);
             setAudioObj(audio);
             audio.play();
             setIsPlaying(true);
             setPlayingIndex(index);
-            audio.onended = () => {
-                URL.revokeObjectURL(audioUrl);
-                setIsPlaying(false);
-                setPlayingIndex(null);
-            };
         } catch (error) {
             console.error('Error playing audio:', error);
             toast.error('Không thể phát âm thanh');
@@ -130,6 +162,22 @@ function Page() {
                 placeholder='Nhập token'
                 onChange={(e) => setToken(e.target.value)}
             />
+
+            <h3 className='mt-3'>Thời lượng</h3>
+            <Select
+                variant='bordered'
+                className='max-w-[100px] mt-1'
+                selectedKeys={[payloadDuration]}
+                onChange={(e) => handleChangePayloadDuration(e.target.value)}
+                defaultSelectedKeys={["30"]}
+            >
+                {durationOptions.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                        {option.label}
+                    </SelectItem>
+                ))}
+            </Select>
+        
             <Button
                 className="py-7 mt-8 w-full bg-gradient-to-tr from-secondary-300 to-secondary-500 text-white shadow-lg text-lg font-medium"
                 onClick={handleConvert}
@@ -138,6 +186,11 @@ function Page() {
             </Button>
             <div className='flex flex-col gap-4 mt-4 w-full'>
                 <p className="text-xl font-semibold">Kết quả</p>
+                {
+                    voiceTtm.length === 0 && (
+                        <p className="text-xl opacity-50">Chưa có bài hát nào</p>
+                    )
+                }
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4'>
 
                     {voiceTtm.map((voice, index) => (
@@ -149,13 +202,13 @@ function Page() {
                                             <span className="text-lg font-medium">Audio #{index + 1}</span>
 
                                             <span className="text-sm ">
-                                                {new Date().toLocaleString()} {/* Thay bằng voice.timestamp nếu có */}
+                                                {voice.audioEncoding}
                                             </span>
                                         </div>
                                         <div className="flex gap-2">
                                             <Button
                                                 variant='bordered'
-                                                className='min-w-[120px]'
+                                                className='px-3'
                                                 onClick={() => handleListen(voice.data || '', index)}
                                             >
                                                 <p className="text-lg text-primary-foreground">
@@ -166,7 +219,7 @@ function Page() {
                                             </Button>
                                             <Button
                                                 variant='bordered'
-                                                className='min-w-[50px]'
+                                                className='px-3'
                                                 onClick={() => handleDownload(voice.data || '', index)}
                                             >
                                                 <p className="text-lg text-primary-foreground">⬇Tải xuống</p>
@@ -177,6 +230,22 @@ function Page() {
                                         <p className="font-medium mb-1">Nội dung:</p>
                                         <p>{voice.mediaTitle || text}</p> {/* Hiển thị text tương ứng của voice nếu có */}
                                     </div>
+                                    {playingIndex === index && (
+                                        <div className="flex flex-col gap-2">
+                                            <input
+                                                type="range"
+                                                min={0}
+                                                max={duration || 100}
+                                                value={currentTime}
+                                                onChange={(e) => handleSliderChange(Number(e.target.value))}
+                                                className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                                            />
+                                            <div className="flex justify-between text-sm">
+                                                <span>{formatTime(currentTime.toString())}</span>
+                                                <span>{formatTime(duration)}</span>
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             }
                         </Card>

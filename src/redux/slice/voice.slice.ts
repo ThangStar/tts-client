@@ -70,10 +70,10 @@ const action = {
     setVoiceSelected: createAsyncThunk('voice/setVoiceSelected', async (voice: voice, thunkAPI) => {
         return thunkAPI.fulfillWithValue(voice)
     }),
-    ttm: createAsyncThunk('ttm/ttm', async ({ text, token }: { text: string, token: string }, thunkAPI) => {
+    ttm: createAsyncThunk('ttm/ttm', async ({ text, token, payloadDuration }: { text: string, token: string, payloadDuration: number }, thunkAPI) => {
         toast("Đang sáng tác...")
         try {
-            const res = await TTMApi.ttm(text, token)
+            const res = await TTMApi.ttm(text, token, payloadDuration)
             return thunkAPI.fulfillWithValue(res)
         } catch (error) {
             return thunkAPI.rejectWithValue({error, mediaTitle: text})
