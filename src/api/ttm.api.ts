@@ -20,7 +20,7 @@ interface SoundDemoPayload {
 }
 export type ttm_data = {
     data?: string,
-    audioContainer?: string, 
+    audioContainer?: string,
     conversationToken?: string,
     mediaTitle?: string,
     soundLengthSeconds?: number,
@@ -34,11 +34,13 @@ export type ttm_response = {
 }
 export const TTMApi = {
     ttm: async (text: string, token: string, payloadDuration: number): Promise<ttm_data> => {
-        const url = "http://haihoanghorse.io.vn/v2/api/ttm";
+        const url = "http://localhost:3002/api/ttm";
         try {
             const response = await axios.post(url, {
-                text: text,
-                soundLengthSeconds: payloadDuration
+                data: {
+                    text: text,
+                    soundLengthSeconds: payloadDuration
+                }
             }, {
                 headers: {
                     "x-api-token": token
@@ -47,7 +49,7 @@ export const TTMApi = {
             });
             if (response.status !== 200) {
                 throw new Error(`HTTP error! status: ${response.status}`);
-            }else{
+            } else {
                 return response.data.data as ttm_data;
             }
 
