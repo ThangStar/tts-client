@@ -35,8 +35,6 @@ export type ttm_response = {
 export const TTMApi = {
     ttm: async (text: string, token: string, payloadDuration: number): Promise<ttm_data> => {
         const url = "http://haihoanghorse.io.vn/v2/api/ttm";
-        console.log(payloadDuration);
-        
         try {
             const response = await axios.post(url, {
                 text: text,
