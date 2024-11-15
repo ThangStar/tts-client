@@ -7,7 +7,6 @@ import { omit } from "lodash";
 export const TTSApi = {
     tts: async (params: tts_params_dto) => {
         console.log('body', params.body);
-
         const client = await Client.connect(params.idRepo);
         console.log("Đã connect được đến server");
 

@@ -26,7 +26,7 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
-    "@gradio/client": "^1.6.0",
+    "@gradio/client": "^1.7.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

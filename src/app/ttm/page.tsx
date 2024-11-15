@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { number } from 'yup'
 
 function Page() {
-    const [text, setText] = useState('vinahouse, remix tiktok vietnam')
+    const [text, setText] = useState('Vinahouse remix sôi động, hòa quyện âm hưởng đàn tranh Việt Nam, bass mạnh, drop cuốn hút, mở đầu nhẹ nhàng, cao trào bùng nổ, âm sắc đơn')
     const dispatch = useDispatch<any>()
     const { ttm, ttmLoading } = VoiceAction
     const { voiceTtm }: VoiceState = useSelector((state: any) => state.voice.value)
@@ -26,9 +26,15 @@ function Page() {
         { label: "70 giây", value: "70" },
     ]
 
+    const isLoading = voiceTtm.some(item => item.loading)
+
     const handleConvert = async () => {
         if (text.trim() === '') {
             toast.error('Vui lòng nhập văn bản');
+            return;
+        }
+        if(text.length > 200){
+            toast.error('Văn bản không được quá 200 ký tự');
             return;
         }
         dispatch(ttmLoading({ loading: true, mediaTitle: text }))
@@ -142,18 +148,22 @@ function Page() {
     return (
         <div className="flex flex-col justify-center px-6 py-4">
             <h1 className="mb-6">Công cụ AI sáng tạo âm nhạc</h1>
+            <h3 className='my-3'>Nội dung âm nhạc</h3>
             <Textarea
                 variant="bordered"
                 placeholder="Nhập nội dung âm nhạc"
                 disableAnimation
                 value={text}
+                isInvalid={text.length > 200}
+                errorMessage="Nội dung không được quá 200 ký tự"
                 onChange={(e) => setText(e.target.value)}
                 classNames={{
                     base: "max-w-full",
                     input: "resize-y min-h-[180px] text-lg",
                 }}
             />
-
+            <p className='mt-2'><span className='font-semibold text-primary'>Nên</span>: Các từ về phong cách nhạc, giai điệu, âm thanh</p>
+            <p className=''><span className='font-semibold text-red-500'>Hạn chế</span>: Các từ về ca sĩ, tên bài hát, tên album - có thể gây ra lỗi</p>
             <h3 className='mt-3'>Token</h3>
             <Input
                 variant='bordered'
@@ -181,8 +191,10 @@ function Page() {
             <Button
                 className="py-7 mt-8 w-full bg-gradient-to-tr from-secondary-300 to-secondary-500 text-white shadow-lg text-lg font-medium"
                 onClick={handleConvert}
+                isLoading={isLoading}
+                isDisabled={isLoading}
             >
-                Chuyển đổi
+                {isLoading ? "Đang xử lý..." : "Chuyển đổi"}
             </Button>
             <div className='flex flex-col gap-4 mt-4 w-full'>
                 <p className="text-xl font-semibold">Kết quả</p>

@@ -18,8 +18,16 @@ function ModalNoti() {
                 <ModalBody>
                     <h3>Các tính năng mới:</h3>
                     <ul>
-                        <li>Chat với AI: Tương tác trực tiếp với trí tuệ nhân tạo</li>
-                        <li>Tạo content tự động: Sử dụng AI để tạo nội dung chất lượng cao</li>
+                        <li>
+                            <strong>Sáng tạo âm nhạc:</strong> Chuyển đổi văn bản thành giai điệu độc đáo với công nghệ AI tiên tiến. 
+                            Bạn có thể:
+                            <ul className="ml-6 my-2 list-disc">
+                                <li>Tạo nhạc nền từ văn bản với nhiều độ dài khác nhau (30, 50, 70 giây)</li>
+                                <li>Tải xuống và sử dụng cho video, podcast hoặc các dự án cá nhân</li>
+                                <li>Tạo không giới hạn các bản nhạc từ cùng một văn bản</li>
+                                <li>Điều chỉnh và nghe thử trước khi tải xuống</li>
+                            </ul>
+                        </li>
                     </ul>
                     <p>
                         Chúng tôi vui mừng giới thiệu hai tính năng mới đột phá:
@@ -27,9 +35,6 @@ function ModalNoti() {
                     <ol>
                         <li>
                             <strong>Chat với AI:</strong> Bạn có thể trò chuyện trực tiếp với trí tuệ nhân tạo tiên tiến của chúng tôi. Đặt câu hỏi, tìm kiếm thông tin, hoặc chỉ đơn giản là trò chuyện để có những cuộc đối thoại thú vị và bổ ích.
-                        </li>
-                        <li>
-                            <strong>Tạo content tự động:</strong> Sử dụng sức mạnh của AI để tạo ra nội dung chất lượng cao cho blog, mạng xã hội, hoặc bất kỳ nhu cầu nào của bạn. Tiết kiệm thời gian và công sức trong quá trình sáng tạo nội dung.
                         </li>
                         <li>
                             <strong>Chuyển văn bản thành giọng nói:</strong> Sử dụng AI để chuyển đổi văn bản thành giọng nói, giúp bạn tạo ra các giọng đọc nhanh chóng và hiệu quả.
@@ -44,7 +49,7 @@ function ModalNoti() {
                         Đóng
                     </Button>
                     <Button onClick={() => {
-                        router.push('/characters');
+                        router.push('/ttm');
                         onClose()
                     }} color="primary">
                         Xem ngay
