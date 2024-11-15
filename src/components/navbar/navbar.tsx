@@ -65,6 +65,7 @@ export const NavbarWrapper = ({ children }: Props) => {
           >
             <GithubIcon />
           </Link> */}
+          
           <NavbarContent>
             <UserDropdown />
           </NavbarContent>

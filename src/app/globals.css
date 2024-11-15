@@ -20,7 +20,7 @@ h2{
 
 /* From Uiverse.io by vinodjangid07 */ 
 .Btn {
-  width: 140px;
+  width: 180px;
   height: 40px;
   border: none;
   border-radius: 10px;
@@ -39,7 +39,7 @@ h2{
 
 .Btn::before {
   position: absolute;
-  content: "Đăng kí Pro";
+  content: "Liên hệ mua TOKEN";
   color: #ffd277;
   display: flex;
   align-items: center;
@@ -48,7 +48,7 @@ h2{
   height: 90%;
   border-radius: 8px;
   transition-duration: 1s;
-  background-color: rgba(0, 0, 0, 0.842);
+  background-color: rgba(17, 17, 17, 0.842);
   background-size: 200%;
 }
 

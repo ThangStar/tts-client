@@ -2,6 +2,7 @@
 import { TTMApi } from '@/api/ttm.api'
 import { VoiceAction, VoiceState } from '@/redux/slice/voice.slice'
 import { Button, Card, CircularProgress, Input, Textarea, Select, SelectItem } from '@nextui-org/react'
+import Link from 'next/link'
 import React, { useState, useRef, useEffect } from 'react'
 import toast from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
@@ -19,7 +20,7 @@ function Page() {
     const [duration, setDuration] = useState("30")
     const [payloadDuration, setPayloadDuration] = useState("30")
     const [currentTime, setCurrentTime] = useState<number>(0);
-    
+
     const durationOptions = [
         { label: "30 giây", value: "30" },
         { label: "50 giây", value: "50" },
@@ -33,12 +34,12 @@ function Page() {
             toast.error('Vui lòng nhập văn bản');
             return;
         }
-        if(text.length > 200){
+        if (text.length > 200) {
             toast.error('Văn bản không được quá 200 ký tự');
             return;
         }
         dispatch(ttmLoading({ loading: true, mediaTitle: text }))
-        dispatch(ttm({ text: text, token: token, payloadDuration: Number(payloadDuration)}))
+        dispatch(ttm({ text: text, token: token, payloadDuration: Number(payloadDuration) }))
     }
 
     const handleTimeUpdate = (audio: HTMLAudioElement) => {
@@ -172,7 +173,8 @@ function Page() {
                 placeholder='Nhập token'
                 onChange={(e) => setToken(e.target.value)}
             />
-
+            <Link href="https://www.facebook.com/mt.meow.meow/" className="Btn mt-3">
+            </Link>
             <h3 className='mt-3'>Thời lượng</h3>
             <Select
                 variant='bordered'
@@ -187,7 +189,7 @@ function Page() {
                     </SelectItem>
                 ))}
             </Select>
-        
+
             <Button
                 className="py-7 mt-8 w-full bg-gradient-to-tr from-secondary-300 to-secondary-500 text-white shadow-lg text-lg font-medium"
                 onClick={handleConvert}
