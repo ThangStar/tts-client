@@ -1,5 +1,6 @@
 'use client'
 import { TTMApi } from '@/api/ttm.api'
+import AudioVisualizer from '@/components/AudioVisualizer'
 import { VoiceAction, VoiceState } from '@/redux/slice/voice.slice'
 import { Button, Card, CircularProgress, Input, Textarea, Select, SelectItem } from '@nextui-org/react'
 import Link from 'next/link'
@@ -148,6 +149,7 @@ function Page() {
 
     return (
         <div className="flex flex-col justify-center px-6 py-4">
+
             <h1 className="mb-6">Công cụ AI sáng tạo âm nhạc</h1>
             <h3 className='my-3'>Nội dung âm nhạc</h3>
             <Textarea
@@ -263,6 +265,7 @@ function Page() {
                                 </div>
                             }
                         </Card>
+
                     ))}
                 </div>
             </div>
